@@ -61,7 +61,7 @@ const ApplicantsTable = () => {
                                         </PopoverTrigger>
                                         <PopoverContent className="w-32 bg-white">
                                             {
-                                                shortListingStatus.map((status, index) => {
+                                                shortListingStatus?.map((status, index) => {
                                                     return (
                                                         <div onClick={() => statusHandler(status,item._id)} key={index} className='flex w-fit items-center ny-2 cursor-pointer'>
                                                             <span>{status}</span>
