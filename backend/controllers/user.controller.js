@@ -55,6 +55,7 @@ export const register = async (req, res) => {
             role,
             profile: {
                 profilePhoto: profilePhotoUrl,
+                resume:resumeUrl
             }
         });
 

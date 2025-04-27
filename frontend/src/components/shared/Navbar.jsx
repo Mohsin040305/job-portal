@@ -62,7 +62,7 @@ const Navbar = () => {
                                 </Link>
                             </div>
                         ) : (
-                            <Popover>
+                            <Popover>e
                                 <PopoverTrigger asChild>
                                     <Avatar className="cursor-pointer">
                                         <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn" />
