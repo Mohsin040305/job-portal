@@ -13,14 +13,28 @@ export const register = async (req, res) => {
                 success: false
             });
         };
-        const file = req.file;
-        const resumeFile = req.files?.resumefile?.[0];
-        console.log(resumeFile)
+        const profileFile = req.files?.file?.[0];
+        const resumeFile = req.files?.resume?.[0];
+    
         let profilePhotoUrl='';
-        if (file) {
-            const fileUri = getDataUri(file);
-            const cloudResponse = await cloudinary.uploader.upload(fileUri);
+        let resumeUrl = '';
+        let resumeOrignalName = '';
+
+        if (profileFile) {
+            const fileUri = getDataUri(profileFile);
+            const cloudResponse = await cloudinary.uploader.upload(fileUri,{
+                folder:"profiles"
+            });
             profilePhotoUrl = cloudResponse.secure_url;
+        }
+        if (resumeFile) {
+            const resumeUri = getDataUri(resumeFile);
+            const cloudResponse = await cloudinary.uploader.upload(resumeUri,{
+                folder:"resumes",
+                resource_type:"rew"
+            });
+            resumeUrl = cloudResponse.secure_url;
+            resumeOriginalName = resumeFile.originalname;
         }
 
 

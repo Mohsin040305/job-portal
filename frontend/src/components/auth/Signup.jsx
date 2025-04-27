@@ -20,6 +20,7 @@ const Signup = () => {
         password: "",
         role: "",
         file: "",
+        resume: null
     });
     const { loading, user } = useSelector(store => store.auth);
     const dispatch = useDispatch();
@@ -30,7 +31,8 @@ const Signup = () => {
     }
 
     const changeFileHandler = (e) => {
-        setInput({ ...input, file: e.target.files?.[0] })
+        const {name, files} = e.target;
+        setInput({ ...input,[name]:files?.[0] });
     }
     
 
@@ -56,6 +58,9 @@ const Signup = () => {
         formData.append("role", input.role);
         if (input.file) {
             formData.append("file", input.file);
+        }
+        if (input.resume) {
+            formData.append("resume",input.resume);
         }
 
         try {
@@ -167,12 +172,15 @@ const Signup = () => {
                         </div>
                     </div>
                     {
-                            input.role === 'student' ?  <div className="flex items-right gap-2">
+                            input.role === 'student' ?  
+                            <div className="flex items-right gap-2">
                             <Label htmlFor="file" className="text-right">resume</Label>
                             <Input
                               type='file'
                               accept='.pdf,.doc,.docx'
-                              onChange={(e) => setResumeFile(e.target.files[0])}
+                              name="resume"
+                              onChange={changeFileHandler}
+                              className="cursor-pointer"
                             />
                         </div> : ""
                         }
