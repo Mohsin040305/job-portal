@@ -64,7 +64,11 @@ export const register = async (req, res) => {
             success: true
         })
     } catch (error) {
-        console.log(error)
+         console.log("REGISTER ERROR:", error);
+    return res.status(500).json({
+        message: "Registration failed",
+        success: false
+    });
     }
 }
 export const login = async (req, res) => {
@@ -120,7 +124,11 @@ export const login = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error);
+        console.log("LOGIN ERROR:", error);
+         return res.status(500).json({
+        message: "Login failed due to server error",
+        success: false
+    });
     }
 }
 export const logout = async (req, res) => {
