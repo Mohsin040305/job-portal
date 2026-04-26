@@ -85,7 +85,7 @@ const Login = () => {
                     </div>
                     {
                         loading ? <Button className="w-full my-4"><Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please wait</Button>:
-                        <Button type="sumbit" className="w-full my-4 bg-black text-white">Sumbit</Button>
+                        <Button type="submit" className="w-full my-4 bg-black text-white">Sumbit</Button>
                     }
                     <span className='text-small'>Dont't have an account ? <Link to="/signup" className='text-blue-600'>Signup</Link></span>
                 </form>
