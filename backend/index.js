@@ -18,11 +18,12 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
     origin:'https://job-portal-frontend-kd0g.onrender.com',
+    origin:"http://localhost:5173",
     credentials:true
 }
 app.use(cors(corsOptions));
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 //api's
 app.use("/api/v1/user", userRoute);
@@ -30,11 +31,17 @@ app.use("/api/v1/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
 app.use("/api/v1/application", applicationRoute);
 
-app.get("/", (req, res) => {
-  res.send("Backend is live 🚀");
-});
+const __dirname = path.resolve();
 
-//"http://localhost:8000/api/v1/user/register"
+if (process.env.NODE_ENV === "development") {
+  app.use(express.static(path.join(__dirname, "frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.join(__dirname, "frontend/dist/index.html")
+    );
+  });
+}
 
 
 app.listen(PORT,()=>{

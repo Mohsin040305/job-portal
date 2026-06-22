@@ -36,7 +36,8 @@ export const registerCompany = async (req,res) => {
 export const getCompany = async (req,res) => {
     try {
         const userId = req.id; //logged in user id
-        const companies = await Company.find(userId);
+        const companies = await Company.find({ userId });
+
         if(!companies){
             return res.status(404).json({
                 message:"Companies not found.",
@@ -73,7 +74,7 @@ export const getCompanyById = async (req,res) => {
 export const updateCompany = async (req,res) => {
     try {
         const {name,description,website,location} = req.body;
-        const file = req.file;
+        const file = req.files?.file?.[0]; 
         let logo = '';
         if(file){
             const fileUri = getDataUri(file);

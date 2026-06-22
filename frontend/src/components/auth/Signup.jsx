@@ -160,7 +160,8 @@ const Signup = () => {
                                 <Label htmlFor="r2">Recruiter</Label>
                             </div>
                         </RadioGroup>
-                        <div className='flex items-center gap-2'>
+                    </div>
+                    <div className='flex items-center gap-2 mb-2'>
                             <Label>Profile</Label>
                             <Input
                                 accept="image/*"
@@ -170,11 +171,10 @@ const Signup = () => {
                                 className="cursor-pointer"
                             />
                         </div>
-                    </div>
                     {
                             input.role === 'student' ?  
                             <div className="flex items-right gap-2">
-                            <Label htmlFor="file" className="text-right">resume</Label>
+                            <Label htmlFor="file" className="text-right">Resume</Label>
                             <Input
                               type='file'
                               accept='.pdf,.doc,.docx'

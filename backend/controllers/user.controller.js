@@ -15,26 +15,26 @@ export const register = async (req, res) => {
         };
         const profileFile = req.files?.file?.[0];
         const resumeFile = req.files?.resume?.[0];
-    
-        let profilePhotoUrl='';
+
+        let profilePhotoUrl = '';
         let resumeUrl = '';
         let resumeOrignalName = '';
 
         if (profileFile) {
             const fileUri = getDataUri(profileFile);
-            const cloudResponse = await cloudinary.uploader.upload(fileUri,{
-                folder:"profiles"
+            const cloudResponse = await cloudinary.uploader.upload(fileUri, {
+                folder: "profiles"
             });
             profilePhotoUrl = cloudResponse.secure_url;
         }
         if (resumeFile) {
             const resumeUri = getDataUri(resumeFile);
-            const cloudResponse = await cloudinary.uploader.upload(resumeUri,{
-                folder:"resumes",
-                resource_type:"rew"
+            const cloudResponse = await cloudinary.uploader.upload(resumeUri, {
+                folder: "resumes",
+                resource_type: "raw"
             });
             resumeUrl = cloudResponse.secure_url;
-            resumeOriginalName = resumeFile.originalname;
+            resumeOrignalName = resumeFile.originalname;
         }
 
 
@@ -55,7 +55,8 @@ export const register = async (req, res) => {
             role,
             profile: {
                 profilePhoto: profilePhotoUrl,
-                resume:resumeUrl
+                resume: resumeUrl,
+                resumeOrignalName
             }
         });
 
@@ -74,7 +75,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        if (!email || !password ) {
+        if (!email || !password) {
             return res.status(400).json({
                 message: "Something is missing",
                 success: false

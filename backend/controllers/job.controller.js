@@ -43,19 +43,16 @@ export const getAllJobs = async (req,res) => {
         const jobs = await Job.find(query).populate({
             path:"company"
         }).sort({createdAt: -1});
-        if(!jobs){
-            return res.status(404).json({
-                message:"Jobs not found.",
-                success:false
-            })
-        };
         return res.status(200).json({
             jobs,
             success:true
-        })
-        console.log(jobs);
+        });
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            message:"Server error",
+            success:false
+        });
     }
 }
 export const getJobById = async (req,res) => {

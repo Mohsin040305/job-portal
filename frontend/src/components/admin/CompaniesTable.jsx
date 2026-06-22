@@ -10,6 +10,8 @@ const CompaniesTable = () => {
     const { companies, searchCompanyByText } = useSelector(store => store.company);
     const [filterCompany, setFilterCompany] = useState(companies);
     const navigate = useNavigate();
+    console.log(companies)
+    console.log(companies.logo);
 
     useEffect(()=>{
         const filterdCompany = companies.length > 0 && companies.filter((company)=>{
