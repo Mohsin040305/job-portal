@@ -31,17 +31,9 @@ app.use("/api/v1/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
 app.use("/api/v1/application", applicationRoute);
 
-const __dirname = path.resolve();
-
-if (process.env.NODE_ENV === "development") {
-  app.use(express.static(path.join(__dirname, "frontend/dist")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(
-      path.join(__dirname, "frontend/dist/index.html")
-    );
-  });
-}
+app.get("/", (req, res) => {
+  res.send("Backend is live 🚀");
+});
 
 
 app.listen(PORT,()=>{
