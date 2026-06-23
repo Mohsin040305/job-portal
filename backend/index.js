@@ -7,6 +7,7 @@ import userRoute from './routes/user.route.js';
 import companyRoute from './routes/company.route.js';
 import jobRoute from './routes/job.route.js';
 import applicationRoute from './routes/application.route.js'
+import cloudinary from "./utils/cloudinary.js";
 
 dotenv.config({});
 
@@ -34,6 +35,9 @@ app.use("/api/v1/application", applicationRoute);
 app.get("/", (req, res) => {
   res.send("Backend is live 🚀");
 });
+cloudinary.api.ping()
+  .then(result => console.log("Cloudinary OK:", result))
+  .catch(err => console.log("Cloudinary ERROR:", err));
 
 
 app.listen(PORT,()=>{
