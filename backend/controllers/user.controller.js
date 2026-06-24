@@ -117,7 +117,7 @@ export const login = async (req, res) => {
             profile: user.profile
         }
 
-        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'strict' }).json({
+        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'none' }).json({
             message: `Welcome back ${user.fullname}`,
             user,
             success: true
@@ -149,8 +149,6 @@ export const updateProfile = async (req, res) => {
         const fileUri = getDataUri(file);
         const cloudresponse = await cloudinary.uploader.upload(fileUri)
 
-
-        //cloudinary will come here 
         let skillsArray = [];
         if (typeof skills === "string") {
             skillsArray = skills.split(",").map(skill => skill.trim());
